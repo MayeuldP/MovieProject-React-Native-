@@ -114,10 +114,11 @@ var MovieSelected = React.createClass({
     stateChange: function()
     {
         if (this.state.check === false)
-            this.setState({backColor: '#e74c3c', logo:'star', check:true});
+                    this.setState({backColor: '#e74c3c', logo:'star', check:true});
         else
-           this.setState({backColor: '#2c3e50', logo:'star-o', check:false});
-   },
+            this.setState({backColor: '#2c3e50', logo:'star-o', check:false});   
+    },
+    
      _openDrawer:function() {    
         this.refs['drawer'].openDrawer();
     },
@@ -140,7 +141,7 @@ var MovieSelected = React.createClass({
                         
                         <View style={styles.container}>
                             <Text style={styles.title} numberOfLines={2}>{movie.title}</Text>
-                            <Text style={{color: color}} numberOfLines={1}>Score: {movie.ratings.audience_score}%</Text>
+                            <Text style={{color: color, marginRight: 20, marginLeft: 20,}} numberOfLines={1}>Score: {movie.ratings.audience_score}%</Text>
                         <Text style={styles.critic} numberOfLines={1}>Année de sortie : {movie.year}</Text>
                         </View>
                     </View>
@@ -158,7 +159,7 @@ var MovieSelected = React.createClass({
                         <View style={styles.space} />
             </ScrollView>
      );},
-     
+
      openFacebook: function(movie){
          var url =movie.links.alternate;
         Share.open({
@@ -205,11 +206,15 @@ var styles = StyleSheet.create({
 			fontSize: 16,
             marginBottom: 2,
             justifyContent:'center',
-            fontWeight: 'bold'
+           //fontFamily: 'Philosopher',
+            marginLeft: 20,
+            marginRight: 20,
 		  },
           critic: {
-			fontSize: 13,
-            justifyContent:'center'
+          fontSize: 13,
+          marginLeft: 20,
+          marginRight: 20,
+          justifyContent:'center'
 		  },
            icon: {
             paddingTop:10,
@@ -229,7 +234,7 @@ var styles = StyleSheet.create({
               paddingTop: 80,
           },
          separator: {
-            backgroundColor: 'rgba(0, 0, 0, 0.1)',
+            backgroundColor: 'rgba(0, 0, 0, 0.2)',
             height: StyleSheet.hairlineWidth,
             marginVertical: 10,
           },

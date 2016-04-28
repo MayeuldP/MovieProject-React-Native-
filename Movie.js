@@ -23,6 +23,7 @@ var titre_film = "";
 var check = 0;
 var MovieSelected = require('./MovieSelected');
 var Icon = require('react-native-vector-icons/Ionicons');
+var Spinner = require('react-native-spinkit');
 
 
 var Movie = React.createClass({
@@ -35,11 +36,22 @@ var Movie = React.createClass({
 		  rowHasChanged: (row1, row2) => row1 !== row2,}),
 	  loaded: false,
       film: this.props.film,
+      index: 0,
+      type: 'Wave',
+      size: 100,
+      color: "#45619d",
       };
   },
    
     render: function()
     {
+         if (!this.state.loaded) {
+            return (<View style={styles.container}>
+                <Spinner style={styles.spinner} size={this.state.size}
+                type={this.state.type} color={this.state.color}/>
+            </View>);
+        }
+        else
         return (
             <Navigator
                  renderScene={()=>this.renderScene(this)}
@@ -79,6 +91,16 @@ renderScene: function(route, navigator)
                                    film: movie,
                                     });
     },
+    
+  renderLoadingView: function(type) {
+        //var type = this.state.types[this.state.index];
+
+        return (
+            <View style={styles.container}>
+                <Spinner style={styles.spinner} size={this.state.size}
+                type={this.state.type} color={this.state.color}/>
+            </View>
+    )},
 
 renderMovie: function(movie) {
     if (titre_film !== "")
@@ -137,11 +159,10 @@ renderMovie: function(movie) {
         .then((responseData) => {
             this.setState({
             dataSource: this.state.dataSource.cloneWithRows(responseData.movies),
+            loaded: true    
             });
         })
-        .done();
-        this.state.loaded = true;
-  } 
+        .done();} 
 });
 
  var NavigationBarRouteMapper = {
@@ -212,7 +233,10 @@ var styles = StyleSheet.create({
         },
         comment: {
             height: 100
-        }
+        },
+          spinner: {
+            marginBottom: 50
+        },
 		});
 
 AppRegistry.registerComponent('Movie', () => Movie);
