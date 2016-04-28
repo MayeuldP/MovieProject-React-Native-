@@ -83,7 +83,7 @@ var MovieSelected = React.createClass({
                         <Icon.Button underlayColor="#F5FCFF"  name={this.state.logo} color={this.state.backColor} backgroundColor="#F5FCFF" size={30}  marginLeft={10} onPress={() => this.stateChange()}>Ajouter aux favoris</Icon.Button>
                         <View style={styles.separator} />
                         <View style={styles.blank} />
-                        <Icon.Button name="share-alt" color="#2c3e50" backgroundColor="#F5FCFF" size ={30} marginLeft={10} onPress={backgroundColor="#e74c3c"}> Partager </Icon.Button>
+                        <Icon.Button name="share-alt" color="#2c3e50" backgroundColor="#F5FCFF" size ={30} marginLeft={10}> Partager </Icon.Button>
                </View>
             </ScrollView>
         );
