@@ -204,11 +204,9 @@ var styles = StyleSheet.create({
             flex:1,
 		  },
           title: {
-            flex: 1,
 			fontSize: 16,
             marginBottom: 2,
             justifyContent:'center',
-           //fontFamily: 'Philosopher',
             marginLeft: 20,
             marginRight: 20,
 		  },
@@ -249,6 +247,7 @@ var styles = StyleSheet.create({
             marginVertical: 12,
           },
           contentContainer: {
+            flex:1,            
             padding: 10,
             backgroundColor:'white'
         },

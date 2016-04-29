@@ -147,7 +147,6 @@ var styles = StyleSheet.create({
             height: 15,
         },
         row: {
-              //alignItems: 'center',
               backgroundColor:'white',
               paddingTop: 90,
               paddingLeft: 40,
