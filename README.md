@@ -28,7 +28,7 @@ this is the components that I use in this project.
 
 ##Movie-project
 
-![Android1] (https://github.com/MayeuldP/MovieProject/blob/master/screens/welcome.png)
-![Android2] (https://github.com/MayeuldP/MovieProject/blob/master/screens/movie.png)
-![Android3] (https://github.com/MayeuldP/MovieProject/blob/master/screens/drawer.png)
+![Android4] (https://github.com/MayeuldP/MovieProject/blob/master/screens/welcome.png)
+![Android4] (https://github.com/MayeuldP/MovieProject/blob/master/screens/movie.png)
+![Android4] (https://github.com/MayeuldP/MovieProject/blob/master/screens/drawer.png)
 ![Android4] (https://github.com/MayeuldP/MovieProject/blob/master/screens/credits.png)
