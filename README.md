@@ -6,6 +6,7 @@ This is the presents node_modules that I use in this project.
 
 * [`react-native-vector-icon`] (https://github.com/oblador/react-native-vector-icons)
 * [`react-native-share`] (https://github.com/EstebanFuentealba/react-native-share)
+* [`react-native-spinkit`] (https://github.com/maxs15/react-native-spinkit)
 
 ##Movie-project : The components
 
