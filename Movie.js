@@ -73,11 +73,11 @@ renderScene: function(route, navigator)
 {
   if (!this.state.loaded === false)
     return(
-            <ListView
-                        dataSource={this.state.dataSource}
-                        renderRow={this.renderMovie}
-                        style={styles.listView}
-                        renderScrollComponent={props => <RecyclerViewBackedScrollView {...props}/>}/> 
+          <ListView
+                dataSource={this.state.dataSource}
+                renderRow={this.renderMovie}
+                style={styles.listView}
+                renderScrollComponent={props => <RecyclerViewBackedScrollView {...props}/>}/> 
     );
   else
     return (
@@ -93,8 +93,6 @@ renderScene: function(route, navigator)
     },
     
   renderLoadingView: function(type) {
-        //var type = this.state.types[this.state.index];
-
         return (
             <View style={styles.container}>
                 <Spinner style={styles.spinner} size={this.state.size}

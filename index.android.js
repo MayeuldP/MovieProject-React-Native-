@@ -22,6 +22,7 @@ var REQUEST_URL = API_URL + PARAMS;
 var SplashPage = require('./SplashPage');
 var Movie = require('./Movie');
 var MovieSelected = require('./MovieSelected');
+var Credits = require('./Credits');
 
 class MovieProject extends Component {
   render() {
@@ -67,6 +68,12 @@ class MovieProject extends Component {
                         navigator={navigator}
                         film={route.film}/>
           );
+      }
+      
+      if (routeId === 'Credits')
+      {
+          return (<Credits
+                        navigator={navigator}/>);
       }
   }
 
