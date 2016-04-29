@@ -21,7 +21,7 @@ this is the components that I use in this project.
 * View
 * ...
 
-##Movie-project : The API'screens/drawer
+##Movie-project : The API's
 
 * Linking
 
