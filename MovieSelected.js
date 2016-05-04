@@ -13,36 +13,16 @@ import React, {
   Navigator,
   ScrollView,
   View,
+  Dimensions,
   WebView
 } from 'react-native';
 import Share from 'react-native-share';
 
 var titre_film = "";
-var Drawer = require('react-native-drawer');
 var Icon = require('react-native-vector-icons/FontAwesome');
 var DrawerLayoutAndroid = require('DrawerLayoutAndroid')
-
-
-
-
-  var Cast = React.createClass({
-  render: function() {
-    if (!this.props.actors) {
-      return null;
-    }
-
-    return (
-      <View>
-        <Text style={styles.castTitle}>Actors</Text>
-        {this.props.actors.map(actor =>
-          <Text key={actor.name} style={styles.castActor}>
-            &bull; {actor.name}
-          </Text>
-        )}
-      </View>
-    );
-  },
-});
+var Lightbox = require('react-native-lightbox');
+var WINDOW_WIDTH = Dimensions.get('window').width;
 
 
 var MovieSelected = React.createClass({
@@ -65,27 +45,24 @@ var MovieSelected = React.createClass({
                 <View style={{height: 200, width: 300, backgroundColor: '#2c3e50'}}>
                  <View style={{flexDirection: 'row'}}>
                  <Text color="#e74c3c" style={{color:'#F5FCFF', marginTop: 80, marginLeft: 20, fontSize:20}}>Movie Project</Text>
-                 <Image
-                    source={require('./img/logo-flat.png')}
-                    style={{width: 100, height: 100, marginTop: 40, marginLeft: 40}}
-                    resizeMode ='stretch'>
+                    <Image
+                        source={require('./img/logo-flat.png')}
+                        style={{width: 100, height: 100, marginTop: 40, marginLeft: 40}}
+                        resizeMode ='stretch'>
                     </Image>
-                    </View>
+                   </View>
                     <View style={styles.space} />
                     <Text color="#e74c3c" style={{fontSize: 10, color:'#F5FCFF', marginTop: 20, marginLeft: 110}}>Movie Project ©Mayeul du Pradel - 2016</Text>
                 </View>
                 <View style={styles.space} />
                 <View style={{flex: 1}}>
-                        <Icon.Button name="chrome" color="#2c3e50" backgroundColor="#F5FCFF" size ={30} marginLeft={10} onPress={() => this.props.navigator.popToTop()}> Accueil </Icon.Button>
-                        <View style={styles.space} />
-                        <Icon.Button name="film" color="#2c3e50" backgroundColor="#F5FCFF" size ={30} marginLeft={10} > Trouver une séance </Icon.Button>
+                        <Icon.Button underlayColor="#F5FCFF" name="film" color="#2c3e50" backgroundColor="#F5FCFF" size ={30} marginLeft={10} onPress={() => this.props.navigator.popToTop()}> Accueil </Icon.Button>
                         <View style={styles.space} />
                         <Icon.Button underlayColor="#F5FCFF"  name={this.state.logo} color={this.state.backColor} backgroundColor="#F5FCFF" size={30}  marginLeft={10} onPress={() => this.stateChange()}>Ajouter aux favoris</Icon.Button>
-                        <View style={styles.separator} />
-                        <View style={styles.blank} />
-                        <Icon.Button name="hand-peace-o" color="#2c3e50" backgroundColor="#F5FCFF" size ={30} marginLeft={10} onPress={() => this.props.navigator.push({id : "Credits"})}> Crédits </Icon.Button>
                         <View style={styles.space} />
-                        <Icon.Button name="share-alt" color="#2c3e50" backgroundColor="#F5FCFF" size ={30} marginLeft={10}> Partager </Icon.Button>
+                        <Icon.Button underlayColor="#F5FCFF" name="hand-peace-o" color="#2c3e50" backgroundColor="#F5FCFF" size ={30} marginLeft={10} onPress={() => this.props.navigator.push({id : "Credits"})}> Crédits </Icon.Button>
+                        <View style={styles.separator} />
+                        <Icon.Button underlayColor="#F5FCFF" name="share-alt" color="#2c3e50" backgroundColor="#F5FCFF" size ={30} marginLeft={10}> Partager </Icon.Button>
                </View>
             </ScrollView>
         );
@@ -115,11 +92,8 @@ var MovieSelected = React.createClass({
     
     stateChange: function()
     {
-        if (this.state.check === false)
-                    this.setState({backColor: '#e74c3c', logo:'star', check:true});
-        else
-            this.setState({backColor: '#2c3e50', logo:'star-o', check:false});   
-    },
+        this.state.check === false ? this.setState({backColor: '#e74c3c', logo:'star', check:true}) : this.setState({backColor: '#2c3e50', logo:'star-o', check:false})
+    },    
     
      _openDrawer:function() {    
         this.refs['drawer'].openDrawer();
@@ -136,11 +110,9 @@ var MovieSelected = React.createClass({
         return ( 
                 <ScrollView contentContainerStyle={styles.contentContainer}>
                 <View style={styles.row}>
-                        
-                        <Image
+                      <Image
                             source={{uri: movie.posters.thumbnail}}
                             style={styles.thumbnail}/>
-                        
                         <View style={styles.container}>
                             <Text style={styles.title} numberOfLines={2}>{movie.title}</Text>
                             <Text style={{color: color, marginRight: 20, marginLeft: 20,}} numberOfLines={1}>Score: {movie.ratings.audience_score}%</Text>
@@ -148,7 +120,6 @@ var MovieSelected = React.createClass({
                         </View>
                     </View>
                     <View style={styles.separator} />
-                
                 <Text style={styles.title} numberOfLines={10} marginLeft={10}>Lorem ipsum dolor sit amet, consectetur 
                                     adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna 
                                     aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
@@ -226,7 +197,7 @@ var styles = StyleSheet.create({
 			height: 121,
             borderRadius: 10,
             marginRight: 10,
-		  },
+         },
           row: {
               alignItems: 'center',
               backgroundColor:'white',
@@ -251,14 +222,10 @@ var styles = StyleSheet.create({
             padding: 10,
             backgroundColor:'white'
         },
-         anchor: {
-            width: 10,
-            height: 10,
-        },
         share:
         {
             justifyContent:'center',
-        }
+        },
 });
         
 AppRegistry.registerComponent('MovieSelected', () => MovieSelected);

@@ -7,6 +7,7 @@ This is the presents node_modules that I use in this project.
 * [`react-native-vector-icon`] (https://github.com/oblador/react-native-vector-icons)
 * [`react-native-share`] (https://github.com/EstebanFuentealba/react-native-share)
 * [`react-native-spinkit`] (https://github.com/maxs15/react-native-spinkit)
+* [`react-native-scrollable-tab-view`] (https://github.com/skv-headless/react-native-scrollable-tab-view)
 
 ##Movie-project : The components
 
@@ -25,6 +26,7 @@ this is the components that I use in this project.
 ##Movie-project : The API's
 
 * Linking
+* Dimensions
 
 ##Movie-project
 
@@ -32,3 +34,4 @@ this is the components that I use in this project.
 ![Android4] (https://github.com/MayeuldP/MovieProject/blob/master/screens/movie.png)
 ![Android4] (https://github.com/MayeuldP/MovieProject/blob/master/screens/drawer.png)
 ![Android4] (https://github.com/MayeuldP/MovieProject/blob/master/screens/credits.png)
+![Android4] (https://github.com/MayeuldP/MovieProject/blob/master/screens/bio.png)
