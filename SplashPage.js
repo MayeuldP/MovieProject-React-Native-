@@ -1,8 +1,7 @@
 "use strict";
-
-import React, {
+import React, { Component } from 'react';
+import  {
   AppRegistry,
-  Component,
   Image,
   ListView,
   Alert,
@@ -13,6 +12,7 @@ import React, {
   Navigator,
   ScrollView,
   TextInput,
+  Vibration,
   View
 } from 'react-native';
 
@@ -26,6 +26,7 @@ class SplashPage extends Component {
     
     constructor(props)
     {
+      console.ignoredYellowBox = ['Warning: ReactNative.Component'];
       super(props);
       this.state = {
           searchString: "",
@@ -86,6 +87,7 @@ class SplashPage extends Component {
     }
 
     gotoNext() {
+       Vibration.vibrate();
        this.props.navigator.push({
                                   title: "Test",
                                   id:'Movie',

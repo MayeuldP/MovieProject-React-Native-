@@ -1,7 +1,8 @@
-import React, {
+import React from "react";
+import {
   AppRegistry,
-  Component,
   Image,
+  Component,
   ListView,
   Alert,
   TouchableHighlight,
@@ -16,7 +17,7 @@ import React, {
   InteractionManager,
   RecyclerViewBackedScrollView,
   View
-} from 'react-native';
+} from "react-native";
 
 var REQUEST_URL = 'https://raw.githubusercontent.com/facebook/react-native/master/docs/MoviesExample.json';
 var titre_film = "";
@@ -24,11 +25,13 @@ var check = 0;
 var MovieSelected = require('./MovieSelected');
 var Icon = require('react-native-vector-icons/Ionicons');
 var Spinner = require('react-native-spinkit');
+var ReactNative = require('react-native');
 
 
-var Movie = React.createClass({
+var Movie = ReactNative.createClass({
     
   getInitialState: function(props) {
+    console.ignoredYellowBox = ['Warning: ReactNative.Component', 'Warning: ReactNative.createElement'];
     if (this.props.film)
         titre_film = this.props.film;
     return {

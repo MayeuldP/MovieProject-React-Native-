@@ -3,9 +3,9 @@
  * https://github.com/facebook/react-native
  */
 
-import React, {
+import React, { Component } from 'react';
+import {
   AppRegistry,
-  Component,
   StyleSheet,
   Text,
   Alert,
@@ -23,10 +23,12 @@ var SplashPage = require('./SplashPage');
 var Movie = require('./Movie');
 var MovieSelected = require('./MovieSelected');
 var Credits = require('./Credits');
+var Maps = require('./Maps');
 
 class MovieProject extends Component {
   render() {
-	return (
+    console.ignoredYellowBox = ['Warning: ReactNative.createElement'];
+  	return (
        <Navigator
             initialRoute={{
                 id: 'SplashPage',
@@ -73,6 +75,12 @@ class MovieProject extends Component {
       if (routeId === 'Credits')
       {
           return (<Credits
+                        navigator={navigator}/>);
+      }
+      
+      if (routeId === 'Maps')
+      {
+          return (<Maps
                         navigator={navigator}/>);
       }
   }

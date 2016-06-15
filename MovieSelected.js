@@ -1,6 +1,6 @@
-import React, {
+import React, { Component } from 'react';
+import {
   AppRegistry,
-  Component,
   Image,
   ListView,
   Alert,
@@ -17,13 +17,14 @@ import React, {
   WebView
 } from 'react-native';
 import Share from 'react-native-share';
+import ScrollableTabView, { DefaultTabBar, ScrollableTabBar, } from 'react-native-scrollable-tab-view';
+import FacebookTabBar from './FacebookTabBar';
 
 var titre_film = "";
 var Icon = require('react-native-vector-icons/FontAwesome');
 var DrawerLayoutAndroid = require('DrawerLayoutAndroid')
 var Lightbox = require('react-native-lightbox');
 var WINDOW_WIDTH = Dimensions.get('window').width;
-
 
 var MovieSelected = React.createClass({
    getInitialState: function(props) {
@@ -39,8 +40,7 @@ var MovieSelected = React.createClass({
 
     render: function()
     {
-       
-    var navigationView = (
+        var navigationView = (
             <ScrollView backgroundColor="#F5FCFF">
                 <View style={{height: 200, width: 300, backgroundColor: '#2c3e50'}}>
                  <View style={{flexDirection: 'row'}}>
@@ -58,11 +58,13 @@ var MovieSelected = React.createClass({
                 <View style={{flex: 1}}>
                         <Icon.Button underlayColor="#F5FCFF" name="film" color="#2c3e50" backgroundColor="#F5FCFF" size ={30} marginLeft={10} onPress={() => this.props.navigator.popToTop()}> Accueil </Icon.Button>
                         <View style={styles.space} />
+                        <Icon.Button underlayColor="#F5FCFF" name="search" color="#2c3e50" backgroundColor="#F5FCFF" size ={30} marginLeft={10} onPress={() => this.props.navigator.push({id : "Maps"})}> Se connecter </Icon.Button>
+                        <View style={styles.space} />
                         <Icon.Button underlayColor="#F5FCFF"  name={this.state.logo} color={this.state.backColor} backgroundColor="#F5FCFF" size={30}  marginLeft={10} onPress={() => this.stateChange()}>Ajouter aux favoris</Icon.Button>
                         <View style={styles.space} />
                         <Icon.Button underlayColor="#F5FCFF" name="hand-peace-o" color="#2c3e50" backgroundColor="#F5FCFF" size ={30} marginLeft={10} onPress={() => this.props.navigator.push({id : "Credits"})}> Crédits </Icon.Button>
                         <View style={styles.separator} />
-                        <Icon.Button underlayColor="#F5FCFF" name="share-alt" color="#2c3e50" backgroundColor="#F5FCFF" size ={30} marginLeft={10}> Partager </Icon.Button>
+                        <Icon.Button underlayColor="#F5FCFF" name="share-alt" color="#2c3e50" backgroundColor="#F5FCFF" size ={30} marginLeft={10} onPress={() => this.shareApp()}> Partager cette app !</Icon.Button>
                </View>
             </ScrollView>
         );
@@ -90,6 +92,7 @@ var MovieSelected = React.createClass({
           );
     },
     
+    
     stateChange: function()
     {
         this.state.check === false ? this.setState({backColor: '#e74c3c', logo:'star', check:true}) : this.setState({backColor: '#2c3e50', logo:'star-o', check:false})
@@ -106,7 +109,6 @@ var MovieSelected = React.createClass({
            ${Math.round((movie.ratings.audience_score/100)*255)},
            0 
         )`;
-        var myButton = ( <Icon.Button name="facebook" backgroundColor="#3b5998" onPress={this.loginWithFacebook}> Login with Facebook </Icon.Button> );
         return ( 
                 <ScrollView contentContainerStyle={styles.contentContainer}>
                 <View style={styles.row}>
@@ -130,8 +132,8 @@ var MovieSelected = React.createClass({
                         <View style={styles.separator} />
                         <Icon.Button name="share-alt" backgroundColor="#3b5998" style={styles.share} onPress={() => this.openFacebook(movie)}> Share this movie </Icon.Button>
                         <View style={styles.space} />
-            </ScrollView>
-     );},
+                    </ScrollView>
+            );},
 
      openFacebook: function(movie){
          var url =movie.links.alternate;
@@ -141,6 +143,15 @@ var MovieSelected = React.createClass({
             title: "Share Link"
         },(e) => {
       console.log(e);});
+     },
+     
+     shareApp : function(){
+         var url = "https://github.com/MayeuldP/MovieProject";
+         Share.open({
+             share_text: "Hola mundo",
+             share_URL: url,
+             title: "Share Link"},
+             (e) => {console.log(e);});
      }
 });
 

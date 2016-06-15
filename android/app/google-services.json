@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "255442611090",
+    "project_id": "movieproject-b7179"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:255442611090:android:6ba2ac2f2e61eb5a",
+        "android_client_info": {
+          "package_name": "com.movieproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "255442611090-6c48975udjam0hp1c8enuic0rc7kv7be.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.movieproject",
+            "certificate_hash": "F62C8DC287ADF562AA47113CB1820D21F6EE2D07"
+          }
+        },
+        {
+          "client_id": "255442611090-rkrqfpnhg08v82aj8gtqhf7dgj3kvdjf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7b_8WLaE2QCXeuJQYbjjj-UV4RKxl9_c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,6 +1,6 @@
-import React, {
+import React, { Component } from 'react';
+import {
   AppRegistry,
-  Component,
   Image,
   ListView,
   Alert,
@@ -20,9 +20,12 @@ import React, {
 
 var Icon = require('react-native-vector-icons/FontAwesome');
 var Icon2 = require('react-native-vector-icons/Octicons');
+var Icon3 = require('react-native-vector-icons/Ionicons');
+
 var DrawerLayoutAndroid = require('DrawerLayoutAndroid')
 import ScrollableTabView, { DefaultTabBar, ScrollableTabBar, } from 'react-native-scrollable-tab-view';
 import FacebookTabBar from './FacebookTabBar';
+import ActionButton from 'react-native-action-button';
 var {height, width} = Dimensions.get('window');
 
 var Credits = React.createClass({
@@ -152,10 +155,11 @@ var IReact = React.createClass({
       render: function()
       {
         return(
-            //<View style={styles.tab}>
-                 <Text style={{marginLeft:10, marginTop: width/2,  fontStyle: 'italic'}}>This app's was develop using React-Native. You will find on my github all component that I used
-                                               , and the nodes_modules that I installed. And of course the complete code.</Text>                     
-            //</View>
+            <View>
+                <Text style={{marginLeft:10, marginTop: width/2,  fontStyle: 'italic'}}>
+                    This app's was develop using React-Native. You will find on my github all component that I used
+                    , and the nodes_modules that I installed. And of course the complete code.</Text>
+            </View>
         );   
       }
 });
@@ -227,8 +231,17 @@ var styles = StyleSheet.create({
         info:{
              paddingLeft: 50,
              paddingRight: 50
-        }
+        },
+        actionButtonIcon: {
+            fontSize: 20,
+            height: 22,
+            color: 'white',
+        },
 });
 
 AppRegistry.registerComponent('Credits', () => Credits);
 module.exports = Credits;
+
+
+//<Text style={{marginLeft:10, marginTop: width/2,  fontStyle: 'italic'}}>This app's was develop using React-Native. You will find on my github all component that I used
+  //                                             , and the nodes_modules that I installed. And of course the complete code.</Text>

@@ -1,17 +1,17 @@
 package com.movieproject;
 
 import com.facebook.react.ReactActivity;
-import com.smixx.reactnativeicons.ReactNativeIcons;
+import com.AirMaps.AirPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
+import cl.json.RNSharePackage;
+import com.magus.fblogin.FacebookLoginPackage;
+import com.chymtt.reactnativecalendar.CalendarPackage;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
+import com.airbnb.android.react.maps.MapsPackage; // <--- Add this!
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Arrays;
-import com.oblador.vectoricons.VectorIconsPackage;
-import com.syarul.fbintent.RNFbIntentPackage;
-import cl.json.RNSharePackage;
 
 public class MainActivity extends ReactActivity {
 
@@ -19,10 +19,8 @@ public class MainActivity extends ReactActivity {
      * Returns the name of the main component registered from JavaScript.
      * This is used to schedule rendering of the component.
      */
-
     @Override
     protected String getMainComponentName() {
-        
         return "MovieProject";
     }
 
@@ -43,9 +41,12 @@ public class MainActivity extends ReactActivity {
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
+            new AirPackage(),
             new VectorIconsPackage(),
-            new RNFbIntentPackage(),
-            new RNSharePackage()
+            new RNSharePackage(),
+            new FacebookLoginPackage(),
+            new CalendarPackage(),
+            new MapsPackage()
         );
     }
 }
