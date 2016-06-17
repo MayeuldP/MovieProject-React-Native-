@@ -32,51 +32,19 @@ var Credits = React.createClass({
     
   render: function()
   {
-         var navigationView = (
-            <ScrollView backgroundColor="#F5FCFF">
-                <View style={{height: 200, width: 300, backgroundColor: '#2c3e50'}}>
-                 <View style={{flexDirection: 'row'}}>
-                 <Text color="#e74c3c" style={{color:'#F5FCFF', marginTop: 80, marginLeft: 20, fontSize:20}}>Movie Project</Text>
-                 <Image
-                    source={require('./img/logo-flat.png')}
-                    style={{width: 100, height: 100, marginTop: 40, marginLeft: 40}}
-                    resizeMode ='stretch'>
-                    </Image>
-                    </View>
-                    <View style={styles.space} />
-                    <Text color="#e74c3c" style={{fontSize: 10, color:'#F5FCFF', marginTop: 20, marginLeft: 110}}>Movie Project ©Mayeul du Pradel - 2016</Text>
-                </View>
-                <View style={styles.space} />
-                <View style={{flex: 1}}>
-                        <Icon.Button name="film" color="#2c3e50" backgroundColor="#F5FCFF" size ={30} marginLeft={10} onPress={() => this.props.navigator.popToTop()}> Accueil </Icon.Button>
-                        <View style={styles.separator} />
-                        <View style={styles.blank} />
-                        <Icon.Button name="hand-peace-o" color="#2c3e50" backgroundColor="#F5FCFF" size ={30} marginLeft={10} onPress={() => this.props.navigator.push({id : "Credits"})}> Crédits </Icon.Button>
-                        <View style={styles.space} />
-                        <Icon.Button name="share-alt" color="#2c3e50" backgroundColor="#F5FCFF" size ={30} marginLeft={10}> Partager </Icon.Button>
-               </View>
-            </ScrollView>
-        );
         return(
-            <DrawerLayoutAndroid
-                drawerWidth={300}
-                ref={'drawer'}
-                navigator={Navigator.SceneConfigs.HorizontalSwipeJump}
-                drawerPosition={DrawerLayoutAndroid.positions.Right}
-                renderNavigationView={() => navigationView}>
                 <Navigator
-                   configureScene={(route) => {
+                  /* configureScene={(route) => {
                             transition = Navigator.SceneConfigs.HorizontalSwipeJump
-                            transition.gestures = null}}
+                            transition.gestures = null}}*/
                     navigator={this.props.navigator}
-                    initialRoute={{onRightButton: (() => this._openDrawer())}}
+                   // initialRoute={{onRightButton: (() => this._openDrawer())}}
                     navigationBar={
                     <Navigator.NavigationBar style={{backgroundColor: '#246dd5'}}
                         routeMapper={NavigationBarRouteMapper} />
                         }
                         renderScene={() =>this.renderScene()}
                     />
-            </DrawerLayoutAndroid>
           );  
   },
   
@@ -110,17 +78,17 @@ var Social = React.createClass({
         return(
             <View style={styles.container}>
             <View style={styles.row}>
-                <Icon.Button name="twitter" color="#2c3e50" backgroundColor="#dcf4ff" size ={30} onPress={() => Linking.openURL("https://twitter.com/Mayeul31")}> My Twitter (@Mayeul31) </Icon.Button>   
+                <Icon.Button name="twitter" color="#2c3e50" backgroundColor="#dcf4ff" size ={30} onPress={() => Linking.openURL("https://twitter.com/Mayeul31")}><Text style={{fontFamily:'Bariol', fontSize:18}}> My Twitter (@Mayeul31)</Text></Icon.Button>   
                 <View style={styles.space} />
-                <Icon.Button  name="github" color="#2c3e50" backgroundColor="#dcf4ff" size ={30} onPress={() => Linking.openURL("https://github.com/MayeuldP")}> My Github (/MayeuldP) </Icon.Button>   
+                <Icon.Button  name="github" color="#2c3e50" backgroundColor="#dcf4ff" size ={30} onPress={() => Linking.openURL("https://github.com/MayeuldP")}><Text style={{fontFamily:'Bariol', fontSize:18}}>  My Github (/MayeuldP)</Text></Icon.Button>   
                 <View style={styles.space} />
-                <Icon.Button  name="linkedin" color="#2c3e50" backgroundColor="#dcf4ff" size ={30} onPress={() => Linking.openURL("https://fr.linkedin.com/in/mayeul-du-pradel-99108a8a")}> My Linkedin</Icon.Button>   
+                <Icon.Button  name="linkedin" color="#2c3e50" backgroundColor="#dcf4ff" size ={30} onPress={() => Linking.openURL("https://fr.linkedin.com/in/mayeul-du-pradel-99108a8a")}><Text style={{fontFamily:'Bariol', fontSize:18}}>  My Linkedin</Text></Icon.Button>   
                 <View style={styles.space} />
-                <Icon2.Button  name="broadcast" color="#2c3e50" backgroundColor="#dcf4ff" size ={30} onPress={() => Linking.openURL("http://mayeuldupradel.me/")}> My Website </Icon2.Button>   
+                <Icon2.Button  name="broadcast" color="#2c3e50" backgroundColor="#dcf4ff" size ={30} onPress={() => Linking.openURL("http://mayeuldupradel.me/")}><Text style={{fontFamily:'Bariol', fontSize:18}}> My Website</Text></Icon2.Button>   
                 <View style={{height: StyleSheet.hairlineWidth, marginVertical: 30,}}/>
             </View>
             <View>
-                <Text style={{textAlign: 'center', color:'#2c3e50'}}>Mayeul du Pradel - Mai 2016</Text>
+                <Text style={{textAlign: 'center', color:'#2c3e50', fontFamily:'Bariol'}}>Mayeul du Pradel - Mai 2016</Text>
             </View>
           </View>
         );   
@@ -132,7 +100,7 @@ var Info = React.createClass({
       {
         return(
                 <View style={styles.container}>
-                    <Text>Hey :) My name is Mayeul du Pradel. I'm 20, and i'm an IT student in the
+                    <Text style={{textAlign: 'center', fontFamily:'Bariol', fontSize: 15}}>Hey :) My name is Mayeul du Pradel. I'm 20, and i'm an IT student in the
                           European Institute of Information Technology (EPITECH) in France. I'm a third year's 
                           student. I'm mainly learning programming, and have already studied C, C++, Java, Python,
                           C#, HTML/CSS, SQL... I'm currently trainee in a French software firm where I learn 
@@ -140,13 +108,13 @@ var Info = React.createClass({
                      <View style={styles.space} />
                      <View style={styles.info}>
                         <Icon.Button underlayColor="#F5FCFF" name="graduation-cap" color="#2c3e50" backgroundColor="#dcf4ff" 
-                        size ={30} style={styles.share} onPress={() => Linking.openURL("http://www.epitech.eu/")}>Epitech</Icon.Button>
+                        size ={30} style={styles.share} onPress={() => Linking.openURL("http://www.epitech.eu/")}><Text style={{fontSize: 18, fontFamily:'Bariol'}}>Epitech</Text></Icon.Button>
                         <View style={styles.space} />
                         <Icon.Button underlayColor="#F5FCFF" name ="code" color="#2c3e50" backgroundColor="#dcf4ff" 
-                        size ={30} style={styles.share} onPress={() => Linking.openURL("https://facebook.github.io/react-native/")}>React-Native</Icon.Button>
+                        size ={30} style={styles.share} onPress={() => Linking.openURL("https://facebook.github.io/react-native/")}><Text style={{fontSize: 18, fontFamily:'Bariol'}}>React-Native</Text></Icon.Button>
                         <View style={styles.space} />
                      </View>
-                        <Text style={{marginLeft:40}}>mail : mayeul.durieu-du-pradel@epitech.eu</Text>                     
+                        <Text style={{textAlign:'center', fontFamily: 'Bariol'}}>mail : mayeul.durieu-du-pradel@epitech.eu</Text>                     
                 </View>
         );   
       }
@@ -156,7 +124,7 @@ var IReact = React.createClass({
       {
         return(
             <View>
-                <Text style={{marginLeft:10, marginTop: width/2,  fontStyle: 'italic'}}>
+                <Text style={{marginTop: width/2, fontFamily:'Bariolitalic', textAlign: 'center'}}>
                     This app's was develop using React-Native. You will find on my github all component that I used
                     , and the nodes_modules that I installed. And of course the complete code.</Text>
             </View>
@@ -169,21 +137,18 @@ var NavigationBarRouteMapper = {
             return (
             <TouchableOpacity style={{flex: 1, justifyContent: 'center'}}
                 onPress={() => navigator.parentNavigator.pop()}>
-                    <Text style={{color: 'white', margin: 10, fontSize: 15,fontWeight: 'bold', }}>
+                    <Text style={{color: 'white', margin: 10, fontSize: 18, fontFamily:'Bariol' }}>
                     <Image
                         style={styles.icon}
                         source={require('./img/arrows.png')}
                     />
-                            {'  Back'}
+                            {'  Home'}
                     </Text>
             </TouchableOpacity>
             );
         },
         RightButton(route, navigator, index, navState) {
-            return(
-                    <TouchableOpacity style={{flex: 1, justifyContent: 'center'}}>
-                    <Icon.Button name="bars" color="white" backgroundColor="#246dd5" onPress={route.onRightButton}/>
-                    </TouchableOpacity>);
+            return(null);
         },
         Title(route, navigator, index, navState) {
             return null;

@@ -23,9 +23,9 @@ import FacebookTabBar from './FacebookTabBar';
 var titre_film = "";
 var Icon = require('react-native-vector-icons/FontAwesome');
 var DrawerLayoutAndroid = require('DrawerLayoutAndroid')
-var Lightbox = require('react-native-lightbox');
 var WINDOW_WIDTH = Dimensions.get('window').width;
-
+var Lightbox = require('react-native-lightbox');
+const  check_upcoming = false;
 var MovieSelected = React.createClass({
    getInitialState: function(props) {
     return{
@@ -40,56 +40,35 @@ var MovieSelected = React.createClass({
 
     render: function()
     {
-        var navigationView = (
-            <ScrollView backgroundColor="#F5FCFF">
-                <View style={{height: 200, width: 300, backgroundColor: '#2c3e50'}}>
-                 <View style={{flexDirection: 'row'}}>
-                 <Text color="#e74c3c" style={{color:'#F5FCFF', marginTop: 80, marginLeft: 20, fontSize:20}}>Movie Project</Text>
-                    <Image
-                        source={require('./img/logo-flat.png')}
-                        style={{width: 100, height: 100, marginTop: 40, marginLeft: 40}}
-                        resizeMode ='stretch'>
-                    </Image>
-                   </View>
-                    <View style={styles.space} />
-                    <Text color="#e74c3c" style={{fontSize: 10, color:'#F5FCFF', marginTop: 20, marginLeft: 110}}>Movie Project ©Mayeul du Pradel - 2016</Text>
-                </View>
-                <View style={styles.space} />
-                <View style={{flex: 1}}>
-                        <Icon.Button underlayColor="#F5FCFF" name="film" color="#2c3e50" backgroundColor="#F5FCFF" size ={30} marginLeft={10} onPress={() => this.props.navigator.popToTop()}> Accueil </Icon.Button>
-                        <View style={styles.space} />
-                        <Icon.Button underlayColor="#F5FCFF" name="search" color="#2c3e50" backgroundColor="#F5FCFF" size ={30} marginLeft={10} onPress={() => this.props.navigator.push({id : "Maps"})}> Se connecter </Icon.Button>
-                        <View style={styles.space} />
-                        <Icon.Button underlayColor="#F5FCFF"  name={this.state.logo} color={this.state.backColor} backgroundColor="#F5FCFF" size={30}  marginLeft={10} onPress={() => this.stateChange()}>Ajouter aux favoris</Icon.Button>
-                        <View style={styles.space} />
-                        <Icon.Button underlayColor="#F5FCFF" name="hand-peace-o" color="#2c3e50" backgroundColor="#F5FCFF" size ={30} marginLeft={10} onPress={() => this.props.navigator.push({id : "Credits"})}> Crédits </Icon.Button>
-                        <View style={styles.separator} />
-                        <Icon.Button underlayColor="#F5FCFF" name="share-alt" color="#2c3e50" backgroundColor="#F5FCFF" size ={30} marginLeft={10} onPress={() => this.shareApp()}> Partager cette app !</Icon.Button>
-               </View>
-            </ScrollView>
-        );
         return(
-            <DrawerLayoutAndroid
-                drawerWidth={300}
-                ref={'drawer'}
-                navigator={Navigator.SceneConfigs.HorizontalSwipeJump}
-                drawerPosition={DrawerLayoutAndroid.positions.Right}
-                renderNavigationView={() => navigationView}>
                 <Navigator
                     film={this.props.film}
-                    configureScene={(route) => {
+                  /*  configureScene={(route) => {
                             transition = Navigator.SceneConfigs.HorizontalSwipeJump
-                            transition.gestures = null}}
+                            transition.gestures = null}}*/
                     navigator={this.props.navigator}
-                    initialRoute={{onRightButton: (() => this._openDrawer())}}
+                    //initialRoute={{onRightButton: (() => this._openDrawer())}}
                     navigationBar={
                     <Navigator.NavigationBar style={{backgroundColor: '#246dd5'}}
                         routeMapper={NavigationBarRouteMapper} />
                         }
                         renderScene={() =>this.renderScene(this.props.film)}
                     />
-            </DrawerLayoutAndroid>
           );
+    },
+    
+    check_upcoming: function()
+    {
+       switch (check_upcoming)
+       {
+           case false:
+              this.props.navigator.push({id : 'Upcomming'});
+              check_upcoming = true;
+              break;
+           case true:
+              this.props.navigator.replace({id : 'Upcomming'});
+              break;
+       }
     },
     
     
@@ -112,25 +91,25 @@ var MovieSelected = React.createClass({
         return ( 
                 <ScrollView contentContainerStyle={styles.contentContainer}>
                 <View style={styles.row}>
-                      <Image
-                            source={{uri: movie.posters.thumbnail}}
-                            style={styles.thumbnail}/>
+                            <Image
+                                    source={{uri: movie.posters.thumbnail}}
+                                    style={styles.thumbnail}/>
                         <View style={styles.container}>
                             <Text style={styles.title} numberOfLines={2}>{movie.title}</Text>
                             <Text style={{color: color, marginRight: 20, marginLeft: 20,}} numberOfLines={1}>Score: {movie.ratings.audience_score}%</Text>
-                        <Text style={styles.critic} numberOfLines={1}>Année de sortie : {movie.year}</Text>
+                        <Text style={styles.critic} numberOfLines={1}>Releases Dates : {movie.release_dates.theater}</Text>
                         </View>
                     </View>
                     <View style={styles.separator} />
-                <Text style={styles.title} numberOfLines={10} marginLeft={10}>Lorem ipsum dolor sit amet, consectetur 
-                                    adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna 
-                                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                                    nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit </Text>
+                               <ScrollView>
+                                    <Text style={styles.synopsis} marginLeft={10}>{movie.synopsis}</Text>
+                               </ScrollView>
+
                         <View style={styles.separator} />
-                        <Text style={styles.title}>Acteur(s): </Text>
-                        <Text numberOfLines={1}> {movie.abridged_cast.map(actor =><Text key={actor.name}>&bull; {actor.name}</Text>)}</Text>
+                        <Text style={styles.synopsis}>Acteur(s): </Text>
+                        <Text numberOfLines={1}> {movie.abridged_cast.map(actor =><Text key={actor.name} style={{fontFamily:'Bariol'}}>&bull; {actor.name}</Text>)}</Text>
                         <View style={styles.separator} />
-                        <Icon.Button name="share-alt" backgroundColor="#3b5998" style={styles.share} onPress={() => this.openFacebook(movie)}> Share this movie </Icon.Button>
+                        <Icon.Button name="share-alt" backgroundColor="#3b5998" style={styles.share} onPress={() => this.openFacebook(movie)}><Text style={{fontFamily:'Bariol', fontSize: 18, color: 'white'}}>Share this movie</Text></Icon.Button>
                         <View style={styles.space} />
                     </ScrollView>
             );},
@@ -144,15 +123,6 @@ var MovieSelected = React.createClass({
         },(e) => {
       console.log(e);});
      },
-     
-     shareApp : function(){
-         var url = "https://github.com/MayeuldP/MovieProject";
-         Share.open({
-             share_text: "Hola mundo",
-             share_URL: url,
-             title: "Share Link"},
-             (e) => {console.log(e);});
-     }
 });
 
 var NavigationBarRouteMapper = {
@@ -160,7 +130,7 @@ var NavigationBarRouteMapper = {
             return (
             <TouchableOpacity style={{flex: 1, justifyContent: 'center'}}
                 onPress={() => navigator.parentNavigator.pop()}>
-                    <Text style={{color: 'white', margin: 10, fontSize: 15,fontWeight: 'bold', }}>
+                    <Text style={{color: 'white', margin: 10, fontSize: 18, fontFamily: 'Bariol'}}>
                     <Image
                         style={styles.icon}
                         source={require('./img/arrows.png')}
@@ -171,10 +141,7 @@ var NavigationBarRouteMapper = {
             );
         },
         RightButton(route, navigator, index, navState) {
-            return(
-                    <TouchableOpacity style={{flex: 1, justifyContent: 'center'}}>
-                    <Icon.Button name="bars" color="white" backgroundColor="#246dd5" onPress={route.onRightButton}/>
-                    </TouchableOpacity>);
+            return(null);
         },
         Title(route, navigator, index, navState) {
             return null;
@@ -186,17 +153,27 @@ var styles = StyleSheet.create({
             flex:1,
 		  },
           title: {
-			fontSize: 16,
+			fontSize: 28,
             marginBottom: 2,
             justifyContent:'center',
             marginLeft: 20,
             marginRight: 20,
+            fontFamily:'Bariol'
 		  },
+          synopsis:{
+			fontSize: 18,
+            marginBottom: 2,
+            justifyContent:'center',
+            marginLeft: 20,
+            marginRight: 20,
+            fontFamily:'Bariol'
+          },
           critic: {
-          fontSize: 13,
+          fontSize: 15,
           marginLeft: 20,
           marginRight: 20,
-          justifyContent:'center'
+          justifyContent:'center',
+          fontFamily:'Bariol'
 		  },
            icon: {
             paddingTop:10,
@@ -236,6 +213,9 @@ var styles = StyleSheet.create({
         share:
         {
             justifyContent:'center',
+        },
+          col: {
+            flex: 1,
         },
 });
         

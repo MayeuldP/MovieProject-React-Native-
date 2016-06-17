@@ -19,8 +19,7 @@ import {
   View
 } from "react-native";
 
-var REQUEST_URL = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/opening.json?apikey=7waqfqbprs7pajbz28mqf6vz'//'https://raw.githubusercontent.com/facebook/react-native/master/docs/MoviesExample.json';
-var REQUEST_URL2 = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=7waqfqbprs7pajbz28mqf6vz'//'https://raw.githubusercontent.com/facebook/react-native/master/docs/MoviesExample.json';
+var REQUEST_URL = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/upcoming.json?apikey=7waqfqbprs7pajbz28mqf6vz';
 var titre_film = "";
 var check = 0;
 var MovieSelected = require('./MovieSelected');
@@ -29,7 +28,7 @@ var Spinner = require('react-native-spinkit');
 var ReactNative = require('react-native');
 
 
-var Movie = ReactNative.createClass({
+var Upcomming = ReactNative.createClass({
     
   getInitialState: function(props) {
     console.ignoredYellowBox = ['Warning: ReactNative.Component', 'Warning: ReactNative.createElement'];
@@ -38,8 +37,6 @@ var Movie = ReactNative.createClass({
     return {
       dataSource: new ListView.DataSource({
 		  rowHasChanged: (row1, row2) => row1 !== row2,}),
-      dataSource2: new ListView.DataSource({
-	      rowHasChanged: (row1, row2) => row1 !== row2,}),
 	  loaded: false,
       film: this.props.film,
       index: 0,
@@ -98,6 +95,14 @@ renderScene: function(route, navigator)
                                     });
     },
     
+  renderLoadingView: function(type) {
+        return (
+            <View style={styles.container}>
+                <Spinner style={styles.spinner} size={this.state.size}
+                type={this.state.type} color={this.state.color}/>
+            </View>
+    )},
+
 renderMovie: function(movie) {
     if (titre_film !== "")
     {
@@ -147,11 +152,10 @@ renderMovie: function(movie) {
    
  componentDidMount: function() {
     this.fetchData();
-    //this.fetchData2();
   },
   
    fetchData: function() {
-        fetch(REQUEST_URL2)
+        fetch(REQUEST_URL)
         .then((response) => response.json())
         .then((responseData) => {
             this.setState({
@@ -159,7 +163,7 @@ renderMovie: function(movie) {
             loaded: true    
             });
         })
-        .done();}, 
+        .done();} 
 });
 
  var NavigationBarRouteMapper = {
@@ -167,7 +171,7 @@ renderMovie: function(movie) {
         return (
         <TouchableOpacity style={{flex: 1, justifyContent: 'center'}}
             onPress={() => navigator.parentNavigator.replace({id : 'SplashPage'})}>
-                <Text style={{color: 'white', margin: 10, fontSize: 20, fontFamily:'Bariol' }}>
+                <Text style={{color: 'white', margin: 10, fontSize: 18,fontFamily:'Bariol' }}>
                 <Image
                     style={styles.icon}
                     source={require('./img/arrows.png')}
@@ -183,7 +187,7 @@ renderMovie: function(movie) {
     Title(route, navigator, index, navState) {
         return (
         <View style={{justifyContent:'center', flex:1, marginLeft:65}}>
-            <Text style={{color:'white', fontSize:20, fontFamily:'Bariol'}}>Box-Office</Text>
+            <Text style={{color:'white', fontSize:23, fontFamily:'Bariol'}}>Upcoming</Text>
          </View>
         );
     }
@@ -209,7 +213,7 @@ var styles = StyleSheet.create({
 			fontSize: 20,
 			marginBottom: 8,
 	        marginLeft: 20,
-            fontFamily:'Bariol'
+            fontFamily :'Bariol'
           },
 		  year: {
 			marginLeft: 20,
@@ -242,5 +246,5 @@ var styles = StyleSheet.create({
         },
 		});
 
-AppRegistry.registerComponent('Movie', () => Movie);
-module.exports = Movie;
+AppRegistry.registerComponent('Upcomming', () => Upcomming);
+module.exports = Upcomming;

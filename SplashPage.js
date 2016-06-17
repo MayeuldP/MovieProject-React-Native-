@@ -10,27 +10,30 @@ import  {
   StyleSheet,
   Text,
   Navigator,
+  DrawerLayoutAndroid,
   ScrollView,
   TextInput,
   Vibration,
   View
 } from 'react-native';
+import Share from 'react-native-share';
 
 var ToolbarAndroid = require('ToolbarAndroid');
 var Movie = require('./Movie');
-var Icon = require('react-native-vector-icons/MaterialIcons');
-var IconF = require('react-native-vector-icons/FontAwesome');
-
+var Icon = require('react-native-vector-icons/FontAwesome');
+const check_bo = false;
 
 class SplashPage extends Component {
     
     constructor(props)
     {
-      console.ignoredYellowBox = ['Warning: ReactNative.Component'];
+      console.ignoredYellowBox = ['Warning: ReactNative.Component' , 'Warning: ReactNative.createElement'];
       super(props);
       this.state = {
           searchString: "",
-          language: "Java"
+          language: "Java",
+          logo: "star-o",
+          backColor: '#2c3e50'
       };  
     }
     
@@ -40,28 +43,81 @@ class SplashPage extends Component {
     
     render()
     {
+         var navigationView = (
+            <ScrollView backgroundColor="#F5FCFF">
+                <View style={{height: 200, width: 300, backgroundColor: '#2c3e50'}}>
+                 <View style={{flexDirection: 'row'}}>
+                 <Text style={{color:'#F5FCFF', marginTop: 70, marginLeft: 20, fontSize: 30, fontFamily:'Bariol'}}>MovieNow</Text>
+                    <Image
+                        source={require('./img/logo-flat.png')}
+                        style={{width: 100, height: 100, marginTop: 40, marginLeft: 40}}
+                        resizeMode ='stretch'>
+                    </Image>
+                   </View>
+                    <View style={styles.space} />
+                    <Text color="#e74c3c" style={{fontSize: 10, color:'#F5FCFF', marginTop: 20, marginLeft: 110, fontFamily : 'Bariol'}}>MovieNow ©Mayeul du Pradel - 2016</Text>
+                </View>
+                <View style={styles.space} />
+                <View style={{flex: 1}}>
+                        <Icon.Button underlayColor="#F5FCFF" name="film" color="#2c3e50" backgroundColor="#F5FCFF" size ={30} marginLeft={10}  onPress={() => this.load_BO()}><Text style={styles.drawer}>Box-Office</Text></Icon.Button>
+                        <View style={styles.space} />
+                        <Icon.Button underlayColor="#F5FCFF" name="search" color="#2c3e50" backgroundColor="#F5FCFF" size ={30} marginLeft={10} onPress={() => this.props.navigator.push({id : "Upcomming"})}><Text style={styles.drawer}>Upcoming Movies</Text></Icon.Button>
+                        <View style={styles.space} />
+                        <Icon.Button underlayColor="#F5FCFF"name="map-marker"color="#2c3e50"backgroundColor="#F5FCFF"size={30}marginLeft={10}onPress={()=>this.props.navigator.push({id : "Maps"})} /*onPress={() => this.stateChange()}*/><Text style={styles.drawer}>Where are you ?</Text></Icon.Button>
+                        <View style={styles.space} />
+                        <Icon.Button underlayColor="#F5FCFF" name="hand-peace-o" color="#2c3e50" backgroundColor="#F5FCFF" size ={30} marginLeft={10} onPress={() => this.props.navigator.push({id : "Credits"})}><Text style={styles.drawer}>Credits</Text></Icon.Button>
+                        <View style={styles.separator} />
+                        <Icon.Button underlayColor="#F5FCFF" name="share-alt" color="#2c3e50" backgroundColor="#F5FCFF" size ={30} marginLeft={10} onPress={() => this.shareApp()}><Text style={styles.drawer}> Share this app !</Text></Icon.Button>
+               </View>
+            </ScrollView>
+        );
         return (
-            <Navigator
-                renderScene={this.renderScene.bind(this)}
-                navigator={this.props.navigator}
-                navigationBar={
-            <Navigator.NavigationBar style={{backgroundColor: '#246dd5'}}
-                routeMapper={NavigationBarRouteMapper} />
-          } />
+             <DrawerLayoutAndroid
+                    drawerWidth={300}
+                    ref={'drawer'}
+                    navigator={Navigator.SceneConfigs.HorizontalSwipeJump}
+                    drawerPosition={DrawerLayoutAndroid.positions.Left}
+                    renderNavigationView={() => navigationView}>
+                        <Navigator
+                            /*configureScene={(route) => {
+                                transition = Navigator.SceneConfigs.HorizontalSwipeJump
+                                transition.gestures = null}}*/
+                            navigator={this.props.navigator}
+                            initialRoute={{onLeftButton: (() => this._openDrawer())}}
+                            navigationBar={
+                        <Navigator.NavigationBar style={{backgroundColor: '#246dd5'}}
+                            routeMapper={NavigationBarRouteMapper}/>
+                            }
+                            renderScene={this.renderScene.bind(this)} />
+                </DrawerLayoutAndroid>
         );
     }
+     
+     _openDrawer() {    
+        this.refs['drawer'].openDrawer();
+    }
+    
+     shareApp(){
+         var url = "https://github.com/MayeuldP/MovieProject";
+         Share.open({
+             share_text: "Hola mundo",
+             share_URL: url,
+             title: "Share Link"},
+             (e) => {console.log(e);});
+     }
     
     renderScene(route, navigator) {
         return (
             <ScrollView>
             <View>
-                <Text numberOfLines={8} style={styles.lorem}>Bienvenue sur l'application ...Lorem ipsum dolor sit amet, consectetur 
-                adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna 
-                aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit 
-                in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
-                occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim 
-                id est laborum</Text>
+                <Text numberOfLines={9} style={styles.lorem}>
+                Welcome on the MovieNow'app. On this app, you can basically look for actual
+                movie currently in theater. You can also consult the upcoming'movies. For
+                any movies, there is his rotten-tomatoes'score, his release years (normally
+                actually), his synopsis, the castings, and a share button. 
+                You will find on the credits all the informations about the author of this
+                applications. Please if you like it, share it to your friends :) 
+                </Text>
             </View>
             <View style={styles.flowRight}>
                 <TextInput
@@ -94,28 +150,34 @@ class SplashPage extends Component {
                                   film: this.state.searchString,
                                 });
     }
+    
+    load_BO()
+    {
+        if (check_bo === false)
+        {
+            this.props.navigator.push({id : "Movie"});
+            check_bo = true;
+        }
+        else
+        {
+            this.props.navigator.replace({id : "Movie"});
+        }
+    }
 };
 
  var NavigationBarRouteMapper = {
     LeftButton(route, navigator, index, navState) {
-        return null;
+        return ( <TouchableOpacity style={{flex: 1, justifyContent: 'center'}}>
+                    <Icon.Button name="bars" color="white" backgroundColor="#246dd5" onPress={route.onLeftButton}/>
+                    </TouchableOpacity>);
     },
     RightButton(route, navigator, index, navState) {
-         return(
-            <View style={{justifyContent: 'center',flex:1}}>
-                <TouchableOpacity style={{flex: 1, justifyContent: 'center'}}
-                    onPress={() =>navigator.parentNavigator.push({id: 'Movie'})}>
-                    <Text style={{color: 'white', fontWeight:'bold'}}>
-                      Movie >
-                    </Text>
-                </TouchableOpacity>
-            </View>
-         );
+         return null;
     },
     Title(route, navigator, index, navState) {
         return (
-        <View style={{justifyContent:'center', flex:1, marginLeft:35}}>
-            <Text style={{color:'white', fontSize:20}}>Movie-Heaven</Text>
+        <View style={{justifyContent:'center', flex:1, marginLeft:55}}>
+            <Text style={{color:'white', fontSize:20, fontFamily : 'Bariol'}}>Movie-Now</Text>
          </View>
         );
     }
@@ -135,6 +197,7 @@ var styles = StyleSheet.create({
           icon: {
             marginLeft: 20,
             marginTop: 20,
+            
           },
 		  title: {
 			fontSize: 20,
@@ -189,18 +252,30 @@ var styles = StyleSheet.create({
                 borderColor: '#48BBEC',
                 borderRadius: 8,
                 color: '#48BBEC',
-                fontStyle: 'italic'
+                fontFamily:'Bariol'
+                //fontStyle: 'italic'
             },
            space: {
             height: StyleSheet.hairlineWidth,
             marginVertical: 7,
           },
           lorem: {
-              marginTop: 80,
-              marginLeft: 20,
-              marginRight: 20,
-              fontWeight: 'bold',
-              fontStyle: 'italic',
+              marginTop: 120,
+              textAlign:'center',
+              marginLeft: 10,
+              marginRight: 10,
+              fontFamily : 'Bariol',
+              fontSize : 15
+          },
+           separator: {
+            backgroundColor: 'rgba(0, 0, 0, 0.2)',
+            height: StyleSheet.hairlineWidth,
+            marginVertical: 10,
+          },
+          drawer: {
+              fontFamily : 'Bariol',
+              fontSize : 20, 
+              color : '#2c3e50'
           },
 		});
 

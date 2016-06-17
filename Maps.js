@@ -60,7 +60,7 @@ class Maps extends Component {
   componentDidMount() {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          console.warn(position);
+          //console.warn(position);
           var region = {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
@@ -165,7 +165,7 @@ class Maps extends Component {
         return (
         <TouchableOpacity style={{flex: 1, justifyContent: 'center'}}
             onPress={() => navigator.parentNavigator.pop()}>
-                <Text style={{color: 'white', margin: 10, fontSize: 15,fontWeight: 'bold', }}>
+                <Text style={{color: 'white', margin: 10, fontSize: 18,fontFamily:'Bariol'}}>
                 <Image
                     style={styles.icon}
                     source={require('./img/arrows.png')}

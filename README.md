@@ -40,6 +40,7 @@ this is the components that I use in this project.
 ##Movie-project
 
 ![Android4] (https://github.com/MayeuldP/MovieProject/blob/master/screens/welcome.png)
+![Android4] (https://github.com/MayeuldP/MovieProject/blob/master/screens/list.png)
 ![Android4] (https://github.com/MayeuldP/MovieProject/blob/master/screens/movie.png)
 ![Android4] (https://github.com/MayeuldP/MovieProject/blob/master/screens/drawer.png)
 ![Android4] (https://github.com/MayeuldP/MovieProject/blob/master/screens/credits.png)
@@ -48,6 +49,6 @@ this is the components that I use in this project.
 
 ##Setup Android
 
-* Install react-native
+* [`Install react-native`] (https://facebook.github.io/react-native/docs/getting-started.html)
 * cd MovieProject
 * react-native run-android
