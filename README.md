@@ -43,8 +43,8 @@ this is the components that I use in this project.
 ![Android4] (https://github.com/MayeuldP/MovieProject/blob/master/screens/list.png)
 ![Android4] (https://github.com/MayeuldP/MovieProject/blob/master/screens/movie.png)
 ![Android4] (https://github.com/MayeuldP/MovieProject/blob/master/screens/drawer.png)
+![Android4] (https://github.com/MayeuldP/MovieProject/blob/master/screens/filter.png)
 ![Android4] (https://github.com/MayeuldP/MovieProject/blob/master/screens/credits.png)
-![Android4] (https://github.com/MayeuldP/MovieProject/blob/master/screens/bio.png)
 
 
 ##Setup Android

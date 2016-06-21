@@ -11,6 +11,7 @@ import {
   StyleSheet,
   Text,
   Navigator,
+  Dimensions,
   ToastAndroid,
   ControlPanel,
   ToolbarAndroid,
@@ -20,12 +21,15 @@ import {
 } from "react-native";
 
 var REQUEST_URL = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/upcoming.json?apikey=7waqfqbprs7pajbz28mqf6vz';
+var REQUEST_URL2 = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/opening.json?apikey=7waqfqbprs7pajbz28mqf6vz';
 var titre_film = "";
 var check = 0;
 var MovieSelected = require('./MovieSelected');
 var Icon = require('react-native-vector-icons/Ionicons');
 var Spinner = require('react-native-spinkit');
 var ReactNative = require('react-native');
+var ItemCheckbox = require('react-native-item-checkbox');
+var {height, width} = Dimensions.get('window');
 
 
 var Upcomming = ReactNative.createClass({
@@ -37,12 +41,20 @@ var Upcomming = ReactNative.createClass({
     return {
       dataSource: new ListView.DataSource({
 		  rowHasChanged: (row1, row2) => row1 !== row2,}),
+      dataSource2: new ListView.DataSource({
+		  rowHasChanged: (row1, row2) => row1 !== row2,}),
 	  loaded: false,
       film: this.props.film,
       index: 0,
       type: 'Wave',
       size: 100,
       color: "#45619d",
+      op : false,
+      up : false,
+      checked : false,
+      icon : "circle-o",
+      icon2: "circle-o",
+      title: "Coming soon"
       };
   },
    
@@ -58,11 +70,12 @@ var Upcomming = ReactNative.createClass({
         return (
             <Navigator
                  renderScene={()=>this.renderScene(this)}
-                configureScene={(route) => {
+                 configureScene={(route) => {
                                         transition = Navigator.SceneConfigs.HorizontalSwipeJump
                                         transition.gestures = null}}                 
                  film={this.props.film}
                  gestures= {false}
+                 initialRoute={{title:this.state.title}}
                  navigator={this.props.navigator}
                    navigationBar={
             <Navigator.NavigationBar style={{backgroundColor: '#246dd5'}}
@@ -74,19 +87,90 @@ var Upcomming = ReactNative.createClass({
     
 renderScene: function(route, navigator)
 {
-  if (!this.state.loaded === false)
-    return(
-          <ListView
-                dataSource={this.state.dataSource}
-                renderRow={this.renderMovie}
-                style={styles.listView}
-                renderScrollComponent={props => <RecyclerViewBackedScrollView {...props}/>}/> 
-    );
-  else
-    return (
-            <View><Text>Loading...</Text></View>
-    );
+    var d = new Date();
+    n = d.getMonth();
+    var month = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"];
+    var actual_month = month[n+1];
+    if (!this.state.loaded === false)
+    {
+        if (!this.state.checked === false)
+            {
+            if (this.state.icon === "check-circle-o")    
+            {
+                    return(
+                        <ListView
+                            dataSource={this.state.dataSource2}
+                            renderRow={this.renderMovie}
+                            style={styles.listView}
+                            renderScrollComponent={props => <RecyclerViewBackedScrollView {...props}/>}/> 
+                        );
+            }
+            else
+            {
+                    return (
+                        <ListView
+                            dataSource={this.state.dataSource}
+                            renderRow={this.renderMovie}
+                            style={styles.listView}
+                            renderScrollComponent={props => <RecyclerViewBackedScrollView {...props}/>}/> 
+                    );
+                }
+        }
+    else
+        return (
+                <View
+                    style={{backgroundColor :"#ecf0f1", flex:1}}>
+                        <Image
+                            style={{width:150, height:150, marginLeft: 100, marginTop: 90}}
+                            source={require('./img/coming.png')}>
+                        </Image>
+                       <View style={styles.space}/>
+                        <View
+                            style={{marginLeft: 30, marginRight:30, marginTop:25}}>
+                            <ItemCheckbox 
+                                color="black"
+                                checked={this.state.op}
+                                onCheck={() => this.check_op()}
+                                icon_open={this.state.icon}//"circle-o"
+                                icon_check={this.state.icon}//"check-circle-o"
+                                iconSize="normal" //"small", "normal", "large"
+                                size={100}
+                                text="Openning this week"
+                                />
+                            <View style={styles.space} />
+                            <ItemCheckbox
+                                color="black"
+                                checked={this.state.up}
+                                onCheck={() => this.check_up()}
+                                icon_open={this.state.icon2}//"circle-o"
+                                icon_check={this.state.icon2}//"check-circle-o"
+                                iconSize="normal" //"small", "normal", "large"
+                                size={100}
+                                text={"Upcoming in " + actual_month}
+                                />
+                            <View style={styles.space}/>
+                            <TouchableHighlight
+                                style={styles.button}
+                                underlayColor='#99d9f4'
+                                onPress={() => this.setState({checked:true})}>
+                                    <Text style={styles.buttonText}>Confirm</Text>
+                            </TouchableHighlight>
+                        </View>
+                </View>
+        );}
 },
+
+check_op: function()
+{
+    this.setState({op:true, up:false, icon: "check-circle-o", icon2:"circle-o"});
+},
+
+check_up: function()
+{
+    this.setState({up:true, op: false, icon: "circle-o", icon2:"check-circle-o"});
+},
+
   
  _chargeMovie: function(movie)
     {
@@ -94,14 +178,6 @@ renderScene: function(route, navigator)
                                    film: movie,
                                     });
     },
-    
-  renderLoadingView: function(type) {
-        return (
-            <View style={styles.container}>
-                <Spinner style={styles.spinner} size={this.state.size}
-                type={this.state.type} color={this.state.color}/>
-            </View>
-    )},
 
 renderMovie: function(movie) {
     if (titre_film !== "")
@@ -152,6 +228,7 @@ renderMovie: function(movie) {
    
  componentDidMount: function() {
     this.fetchData();
+    this._fetchData();
   },
   
    fetchData: function() {
@@ -160,6 +237,17 @@ renderMovie: function(movie) {
         .then((responseData) => {
             this.setState({
             dataSource: this.state.dataSource.cloneWithRows(responseData.movies),
+            loaded: true    
+            });
+        })
+        .done();}, 
+        
+   _fetchData: function() {
+        fetch(REQUEST_URL2)
+        .then((response) => response.json())
+        .then((responseData) => {
+            this.setState({
+            dataSource2: this.state.dataSource2.cloneWithRows(responseData.movies),
             loaded: true    
             });
         })
@@ -186,8 +274,8 @@ renderMovie: function(movie) {
     },
     Title(route, navigator, index, navState) {
         return (
-        <View style={{justifyContent:'center', flex:1, marginLeft:65}}>
-            <Text style={{color:'white', fontSize:23, fontFamily:'Bariol'}}>Upcoming</Text>
+         <View style={{justifyContent:'center', flex:1, marginLeft:65}}>
+               <Text style={{color:'white', fontSize:23, fontFamily:'Bariol'}}>{route.title}</Text>
          </View>
         );
     }
@@ -209,6 +297,28 @@ var styles = StyleSheet.create({
 			height: 81,
             borderRadius: 10,
 		  },
+           space: {
+            height: StyleSheet.hairlineWidth,
+            marginVertical: 15,
+          },
+          button: {
+               height: 36,
+               flex: 1,
+               flexDirection: 'row',
+               backgroundColor: '#48BBEC',
+               borderColor: '#48BBEC',
+               borderWidth: 1,
+               borderRadius: 8,
+               marginBottom: 10,
+               alignSelf: 'stretch',
+               alignItems:'center',
+               justifyContent: 'center',
+          },
+          buttonText: {
+              fontFamily:'Bariol',
+              fontSize: 20,
+          },
+            
 		  title: {
 			fontSize: 20,
 			marginBottom: 8,
@@ -227,19 +337,13 @@ var styles = StyleSheet.create({
 			  height: 56,
 			  backgroundColor: '#e9eaed',
 		  },
-           nestedText: {
-            marginLeft: 12,
-            marginTop: 20,
-            backgroundColor: 'transparent',
-            color: 'white',
-            margin: 10
-        },
         icon: {
             width: 15,
             height: 15,
         },
-        comment: {
-            height: 100
+        image:{
+            width: 25,
+            height: 25,         
         },
           spinner: {
             marginBottom: 50

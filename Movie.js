@@ -38,8 +38,6 @@ var Movie = ReactNative.createClass({
     return {
       dataSource: new ListView.DataSource({
 		  rowHasChanged: (row1, row2) => row1 !== row2,}),
-      dataSource2: new ListView.DataSource({
-	      rowHasChanged: (row1, row2) => row1 !== row2,}),
 	  loaded: false,
       film: this.props.film,
       index: 0,
@@ -109,7 +107,7 @@ renderMovie: function(movie) {
                                 underlayColor='#dddddd'>
                 <View style={styles.container}>
                     <Image
-                        source={{uri: movie.posters.thumbnail}}
+                        source={{uri: movie.posters.original}}
                         style={styles.thumbnail}/>
                 
                     <View style={styles.rightContainer}>
@@ -166,7 +164,7 @@ renderMovie: function(movie) {
     LeftButton(route, navigator, index, navState) {
         return (
         <TouchableOpacity style={{flex: 1, justifyContent: 'center'}}
-            onPress={() => navigator.parentNavigator.replace({id : 'SplashPage'})}>
+            onPress={() => navigator.parentNavigator.replace({id :"SplashPage"})}>
                 <Text style={{color: 'white', margin: 10, fontSize: 20, fontFamily:'Bariol' }}>
                 <Image
                     style={styles.icon}
@@ -216,7 +214,7 @@ var styles = StyleSheet.create({
             fontFamily:'Bariol'
       	  },
 		  listView: {
-			  marginTop: 50,
+			  marginTop: 55,
 			  backgroundColor: '#F5FCFF',
 		  },
 		  toolbar: {
@@ -231,6 +229,7 @@ var styles = StyleSheet.create({
             margin: 10
         },
         icon: {
+            paddingTop:10,
             width: 15,
             height: 15,
         },

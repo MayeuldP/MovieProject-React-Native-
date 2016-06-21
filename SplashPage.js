@@ -61,7 +61,7 @@ class SplashPage extends Component {
                 <View style={{flex: 1}}>
                         <Icon.Button underlayColor="#F5FCFF" name="film" color="#2c3e50" backgroundColor="#F5FCFF" size ={30} marginLeft={10}  onPress={() => this.load_BO()}><Text style={styles.drawer}>Box-Office</Text></Icon.Button>
                         <View style={styles.space} />
-                        <Icon.Button underlayColor="#F5FCFF" name="search" color="#2c3e50" backgroundColor="#F5FCFF" size ={30} marginLeft={10} onPress={() => this.props.navigator.push({id : "Upcomming"})}><Text style={styles.drawer}>Upcoming Movies</Text></Icon.Button>
+                        <Icon.Button underlayColor="#F5FCFF" name="search" color="#2c3e50" backgroundColor="#F5FCFF" size ={30} marginLeft={10} onPress={() => this.props.navigator.push({id : "Upcomming"})}><Text style={styles.drawer}>Coming soon</Text></Icon.Button>
                         <View style={styles.space} />
                         <Icon.Button underlayColor="#F5FCFF"name="map-marker"color="#2c3e50"backgroundColor="#F5FCFF"size={30}marginLeft={10}onPress={()=>this.props.navigator.push({id : "Maps"})} /*onPress={() => this.stateChange()}*/><Text style={styles.drawer}>Where are you ?</Text></Icon.Button>
                         <View style={styles.space} />
@@ -143,7 +143,7 @@ class SplashPage extends Component {
     }
 
     gotoNext() {
-       Vibration.vibrate();
+      // Vibration.vibrate();
        this.props.navigator.push({
                                   title: "Test",
                                   id:'Movie',
@@ -153,6 +153,7 @@ class SplashPage extends Component {
     
     load_BO()
     {
+        this.setState({film : ""})
         if (check_bo === false)
         {
             this.props.navigator.push({id : "Movie"});
@@ -260,12 +261,12 @@ var styles = StyleSheet.create({
             marginVertical: 7,
           },
           lorem: {
-              marginTop: 120,
+              marginTop: 100,
               textAlign:'center',
               marginLeft: 10,
               marginRight: 10,
               fontFamily : 'Bariol',
-              fontSize : 15
+              fontSize : 17
           },
            separator: {
             backgroundColor: 'rgba(0, 0, 0, 0.2)',

@@ -33,19 +33,17 @@ var MovieSelected = React.createClass({
       film: this.props.film,
       cast: this.props.cast,
       backColor: '#2c3e50',
+      source : "",
       logo: "star-o",
       check: false,
        }
   },
-
+  
     render: function()
     {
         return(
                 <Navigator
                     film={this.props.film}
-                  /*  configureScene={(route) => {
-                            transition = Navigator.SceneConfigs.HorizontalSwipeJump
-                            transition.gestures = null}}*/
                     navigator={this.props.navigator}
                     //initialRoute={{onRightButton: (() => this._openDrawer())}}
                     navigationBar={
@@ -93,7 +91,8 @@ var MovieSelected = React.createClass({
                 <View style={styles.row}>
                             <Image
                                     source={{uri: movie.posters.thumbnail}}
-                                    style={styles.thumbnail}/>
+                                    style={styles.thumbnail}
+                                    resizeMode ='stretch'/>
                         <View style={styles.container}>
                             <Text style={styles.title} numberOfLines={2}>{movie.title}</Text>
                             <Text style={{color: color, marginRight: 20, marginLeft: 20,}} numberOfLines={1}>Score: {movie.ratings.audience_score}%</Text>
@@ -216,6 +215,9 @@ var styles = StyleSheet.create({
         },
           col: {
             flex: 1,
+        },
+        horizontalScrollView: {
+            height: 10,
         },
 });
         
