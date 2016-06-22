@@ -53,4 +53,6 @@ this is the components that I use in this project.
 * cd MovieProject
 * react-native run-android
 
-* All rights concerning the API for get the movies to [`rottentomatoes`] ! (https://www.rottentomatoes.com)
+* All rights concerning the API for get the movies to [`rottentomatoes`] (https://www.rottentomatoes.com)
+* If there are movies that doesn't display their poster, it's because there're too recent, and the
+  api doesn't have update them. Sorry for this disagreement. 

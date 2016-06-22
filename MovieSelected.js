@@ -131,9 +131,10 @@ var MovieSelected = React.createClass({
             );},
 
      openFacebook: function(movie){
+
         Share.open({
             share_text: "Hola mundo",
-            share_URL: "http://www.imdb.com/title/tt"+movie.alternate_ids.imdb,
+            share_URL:  movie.links.alternate,
             title: "Share Link"
         },(e) => {
       console.log(e);});
