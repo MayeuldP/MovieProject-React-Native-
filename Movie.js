@@ -21,6 +21,8 @@ import {
 
 var REQUEST_URL = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/opening.json?apikey=7waqfqbprs7pajbz28mqf6vz'//'https://raw.githubusercontent.com/facebook/react-native/master/docs/MoviesExample.json';
 var REQUEST_URL2 = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=7waqfqbprs7pajbz28mqf6vz'//'https://raw.githubusercontent.com/facebook/react-native/master/docs/MoviesExample.json';
+var POSTER = 'http://www.omdbapi.com/?t=';
+var POSTER2 = '&y=&plot=short&r=json';
 var titre_film = "";
 var check = 0;
 var MovieSelected = require('./MovieSelected');
@@ -128,7 +130,7 @@ renderMovie: function(movie) {
             <TouchableOpacity onPress={() => this._chargeMovie(movie)}>
                 <View style={styles.container}>
                     <Image
-                        source={{uri: movie.posters.thumbnail}}
+                        source={{uri: movie.posters.original}}
                         style={styles.thumbnail}/>
 
                     <View style={styles.rightContainer}>

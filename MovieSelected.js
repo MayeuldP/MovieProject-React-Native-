@@ -26,6 +26,11 @@ var DrawerLayoutAndroid = require('DrawerLayoutAndroid')
 var WINDOW_WIDTH = Dimensions.get('window').width;
 var Lightbox = require('react-native-lightbox');
 const  check_upcoming = false;
+var POSTER = 'http://www.omdbapi.com/?t=';
+var POSTER2 = '&y=&plot=short&r=json';
+var poster = "";
+
+
 var MovieSelected = React.createClass({
    getInitialState: function(props) {
     return{
@@ -36,6 +41,7 @@ var MovieSelected = React.createClass({
       source : "",
       logo: "star-o",
       check: false,
+      posters:'',
        }
   },
   
@@ -55,6 +61,10 @@ var MovieSelected = React.createClass({
           );
     },
     
+   componentDidMount: function(movie) {
+        this.fetchPoster(this.state.film);
+  },
+  
     check_upcoming: function()
     {
        switch (check_upcoming)
@@ -69,11 +79,16 @@ var MovieSelected = React.createClass({
        }
     },
     
-    
-    stateChange: function()
-    {
-        this.state.check === false ? this.setState({backColor: '#e74c3c', logo:'star', check:true}) : this.setState({backColor: '#2c3e50', logo:'star-o', check:false})
-    },    
+        fetchPoster: function(movie)
+        {
+            fetch(POSTER+movie.title+POSTER2)
+                .then((response) => response.json())
+                .then((responseData) => {
+                    poster = responseData.Poster;
+                    this.setState({check : true});
+                })
+                .done();      
+        }, 
     
      _openDrawer:function() {    
         this.refs['drawer'].openDrawer();
@@ -86,11 +101,13 @@ var MovieSelected = React.createClass({
            ${Math.round((movie.ratings.audience_score/100)*255)},
            0 
         )`;
+        //this.fetchPoster(movie);
+        if (this.state.check === true)
         return ( 
                 <ScrollView contentContainerStyle={styles.contentContainer}>
                 <View style={styles.row}>
                             <Image
-                                    source={{uri: movie.posters.thumbnail}}
+                                    source={{uri: poster}}//movie.posters.thumbnail}}
                                     style={styles.thumbnail}
                                     resizeMode ='stretch'/>
                         <View style={styles.container}>
@@ -114,10 +131,9 @@ var MovieSelected = React.createClass({
             );},
 
      openFacebook: function(movie){
-         var url =movie.links.alternate;
         Share.open({
             share_text: "Hola mundo",
-            share_URL: url,
+            share_URL: "http://www.imdb.com/title/tt"+movie.alternate_ids.imdb,
             title: "Share Link"
         },(e) => {
       console.log(e);});
@@ -180,16 +196,16 @@ var styles = StyleSheet.create({
             height: 15,
         },
         thumbnail: {
-			width: 83,
-			height: 121,
-            borderRadius: 10,
+			width: 113,
+			height: 151,
+            borderRadius: 4,
             marginRight: 10,
          },
           row: {
               alignItems: 'center',
               backgroundColor:'white',
               flexDirection:'row',
-              paddingTop: 80,
+              paddingTop: 60,
           },
          separator: {
             backgroundColor: 'rgba(0, 0, 0, 0.2)',

@@ -52,3 +52,5 @@ this is the components that I use in this project.
 * [`Install react-native`] (https://facebook.github.io/react-native/docs/getting-started.html)
 * cd MovieProject
 * react-native run-android
+
+* All rights concerning the API for get the movies to [`rottentomatoes`] ! (https://www.rottentomatoes.com)
