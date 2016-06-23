@@ -53,6 +53,7 @@ class Maps extends Component {
       loaded: false,
       type: 'Circle',
       color: "#45619d",
+      mapType:"standard",
       size: 100,
     };
   }
@@ -128,8 +129,9 @@ class Maps extends Component {
          <View style={styles.container}>
             <MapView
               style={styles.map}
-               region={this.state.region}
+              region={this.state.region}
               annotations={markers}
+              mapType={this.state.mapType}
             >
                 <MapView.Marker
                     coordinate={this.state.region}
@@ -156,8 +158,24 @@ class Maps extends Component {
                 strokeWidth={0.5}
               />
             </MapView>
+            <TouchableOpacity onPress={() => this.changeMapType()} style={[styles.bubble, styles.button]}>
+            <Text>MapType</Text>
+          </TouchableOpacity>
          </View>
       );} 
+      
+      changeMapType()
+      {
+        switch (this.state.mapType)
+        {
+          case "standard":
+              this.setState({mapType: "satellite"});
+              break;
+          case "satellite":
+              this.setState({mapType: "standard"});
+              break;            
+        }
+    }
   };
 
  var NavigationBarRouteMapper = {
@@ -214,6 +232,18 @@ var styles = StyleSheet.create({
     spinner: {
        marginBottom: 50
    },
+    bubble: {
+    backgroundColor: 'rgba(255,255,255,0.7)',
+    paddingHorizontal: 18,
+    paddingVertical: 12,
+    borderRadius: 20,
+  },
+   button: {
+    width: 90,
+    paddingHorizontal: 12,
+    alignItems: 'center',
+    marginHorizontal: 10,
+  },
 });
 
         

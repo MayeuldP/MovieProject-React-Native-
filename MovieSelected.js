@@ -84,8 +84,8 @@ var MovieSelected = React.createClass({
             fetch(POSTER+movie.title+POSTER2)
                 .then((response) => response.json())
                 .then((responseData) => {
-                    poster = responseData.Poster;
-                    this.setState({check : true});
+                       poster = responseData.Poster;
+                        this.setState({check : true});
                 })
                 .done();      
         }, 
@@ -101,7 +101,6 @@ var MovieSelected = React.createClass({
            ${Math.round((movie.ratings.audience_score/100)*255)},
            0 
         )`;
-        //this.fetchPoster(movie);
         if (this.state.check === true)
         return ( 
                 <ScrollView contentContainerStyle={styles.contentContainer}>

@@ -46,6 +46,13 @@ this is the components that I use in this project.
 ![Android4] (https://github.com/MayeuldP/MovieProject/blob/master/screens/filter.png)
 ![Android4] (https://github.com/MayeuldP/MovieProject/blob/master/screens/credits.png)
 
+##Recents Updates
+
+* 23/06/2016 => Adding possibility to change view (Geo-localisation) in standard or satellite.
+* 22/06/2016 => Requests on another API for gettings posters in bigger size.
+* 21/06/2016 => Adding filters for upcoming movies and openning movies.
+* 17/06/2016 => Graphical overhaul (colors / fonts /...)
+* 15/06/2016 => Addings geo-location feature.
 
 ##Setup Android
 
