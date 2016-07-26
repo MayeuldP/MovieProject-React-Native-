@@ -59,7 +59,7 @@ class SplashPage extends Component {
                 </View>
                 <View style={styles.space} />
                 <View style={{flex: 1}}>
-                        <Icon.Button underlayColor="#F5FCFF" name="film" color="#2c3e50" backgroundColor="#F5FCFF" size ={30} marginLeft={10}  onPress={() => this.load_BO()}><Text style={styles.drawer}>Box-Office</Text></Icon.Button>
+                        <Icon.Button underlayColor="#F5FCFF" name="film" color="#2c3e50" backgroundColor="#F5FCFF" size ={30} marginLeft={10}  onPress={() => this.load_BO()}><Text style={styles.drawer}>Top Box-Office</Text></Icon.Button>
                         <View style={styles.space} />
                         <Icon.Button underlayColor="#F5FCFF" name="search" color="#2c3e50" backgroundColor="#F5FCFF" size ={30} marginLeft={10} onPress={() => this.props.navigator.push({id : "Upcomming"})}><Text style={styles.drawer}>Coming soon</Text></Icon.Button>
                         <View style={styles.space} />
@@ -119,20 +119,6 @@ class SplashPage extends Component {
                 applications. Please if you like it, share it to your friends :) 
                 </Text>
             </View>
-            <View style={styles.flowRight}>
-                <TextInput
-                    style={styles.searchInput}
-                    value={this.state.searchString}
-                    onChange={this.onSearchTextChanged.bind(this)}
-                    placeholder='Search a movie...'
-                    placeholderTextColor='#246dd5'/>
-                <TouchableHighlight
-                    style={styles.button}
-                    underlayColor='#99d9f4'
-                    onPress={this.gotoNext.bind(this)}>
-                        <Text style={styles.buttonText}>Go</Text>
-                </TouchableHighlight>
-             </View>
              <View style={styles.space} />
              <Image
                 style={styles.icon}
@@ -140,15 +126,6 @@ class SplashPage extends Component {
             />
            </ScrollView>
         );
-    }
-
-    gotoNext() {
-      // Vibration.vibrate();
-       this.props.navigator.push({
-                                  title: "Test",
-                                  id:'Movie',
-                                  film: this.state.searchString,
-                                });
     }
     
     load_BO()
@@ -161,7 +138,7 @@ class SplashPage extends Component {
         }
         else
         {
-            this.props.navigator.replace({id : "Movie"});
+            this.props.navigator.push({id : "Movie"});
         }
     }
 };

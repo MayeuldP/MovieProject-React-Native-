@@ -151,15 +151,19 @@ renderMovie: function(movie) {
   },
   
    fetchData: function() {
-        fetch(REQUEST_URL2)
+        var f = fetch(REQUEST_URL2)
         .then((response) => response.json())
         .then((responseData) => {
-            this.setState({
-            dataSource: this.state.dataSource.cloneWithRows(responseData.movies),
-            loaded: true    
+             this.setState({
+             dataSource: this.state.dataSource.cloneWithRows(responseData.movies),
+             loaded: true    
             });
         })
-        .done();}, 
+        .catch(function(error) {  
+            Alert.alert("Warning", "Network connection require !");
+        })
+        .done();
+       } 
 });
 
  var NavigationBarRouteMapper = {
@@ -183,7 +187,7 @@ renderMovie: function(movie) {
     Title(route, navigator, index, navState) {
         return (
         <View style={{justifyContent:'center', flex:1, marginLeft:65}}>
-            <Text style={{color:'white', fontSize:20, fontFamily:'Bariol'}}>Box-Office</Text>
+            <Text style={{color:'white', fontSize:20, fontFamily:'Bariol'}}>Top Box-Office</Text>
          </View>
         );
     }

@@ -122,8 +122,8 @@ renderScene: function(route, navigator)
                 <View
                     style={{backgroundColor :"#ecf0f1", flex:1}}>
                         <Image
-                            style={{width:150, height:150, marginLeft: 100, marginTop: 90}}
-                            source={require('./img/coming.png')}>
+                            style={{width:250, height:150, marginLeft: 50, marginTop: 90}}
+                            source={require('./img/comingsoon.png')}>
                         </Image>
                        <View style={styles.space}/>
                         <View

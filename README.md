@@ -1,5 +1,9 @@
 A simple app which show the basics of react-native framework.
 
+##Requirements
+
+* A network connection 
+
 ## Movie-project : The nodes_modules
 
 This is the presents node_modules that I use in this project.

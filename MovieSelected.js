@@ -79,13 +79,16 @@ var MovieSelected = React.createClass({
        }
     },
     
-        fetchPoster: function(movie)
-        {
+   fetchPoster: function(movie)
+      {
             fetch(POSTER+movie.title+POSTER2)
                 .then((response) => response.json())
                 .then((responseData) => {
-                       poster = responseData.Poster;
-                        this.setState({check : true});
+                      if (responseData.Year === "2016")
+                        poster = responseData.Poster;
+                      else
+                        poster = movie.posters.original;
+                      this.setState({check : true});
                 })
                 .done();      
         }, 
@@ -110,7 +113,7 @@ var MovieSelected = React.createClass({
                                     style={styles.thumbnail}
                                     resizeMode ='stretch'/>
                         <View style={styles.container}>
-                            <Text style={styles.title} numberOfLines={2}>{movie.title}</Text>
+                            <Text style={styles.title}  numberOfLines={2}>{movie.title}</Text>
                             <Text style={{color: color, marginRight: 20, marginLeft: 20,}} numberOfLines={1}>Score: {movie.ratings.audience_score}%</Text>
                         <Text style={styles.critic} numberOfLines={1}>Releases Dates : {movie.release_dates.theater}</Text>
                         </View>
