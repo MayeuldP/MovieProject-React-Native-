@@ -2,7 +2,8 @@ A simple app which show the basics of react-native framework.
 
 ##Requirements
 
-* A network connection 
+* A network connection
+* Project only available for Android (Pull request available) 
 
 ## Movie-project : The nodes_modules
 
@@ -52,6 +53,7 @@ this is the components that I use in this project.
 
 ##Recents Updates
 
+* 26/07/2016 => Displaying full size poster's movies if exist, else displaying low quality.
 * 23/06/2016 => Adding possibility to change view (Geo-localisation) in standard or satellite.
 * 22/06/2016 => Requests on another API for gettings posters in bigger size.
 * 21/06/2016 => Adding filters for upcoming movies and openning movies.
@@ -65,5 +67,3 @@ this is the components that I use in this project.
 * react-native run-android
 
 * All rights concerning the API for get the movies to [`rottentomatoes`] (https://www.rottentomatoes.com)
-* If there are movies that doesn't display their poster, it's because there're too recent, and the
-  api doesn't have update them. Sorry for this disagreement. 
