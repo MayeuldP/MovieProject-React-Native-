@@ -147,7 +147,6 @@ renderMovie: function(movie) {
    
  componentDidMount: function() {
     this.fetchData();
-    //this.fetchData2();
   },
   
    fetchData: function() {
@@ -159,11 +158,11 @@ renderMovie: function(movie) {
              loaded: true    
             });
         })
-        .catch(function(error) {  
+        .catch(function(error) {
             Alert.alert("Warning", "Network connection require !");
         })
         .done();
-       } 
+    },
 });
 
  var NavigationBarRouteMapper = {

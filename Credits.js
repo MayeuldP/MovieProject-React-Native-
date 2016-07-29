@@ -26,6 +26,7 @@ var DrawerLayoutAndroid = require('DrawerLayoutAndroid')
 import ScrollableTabView, { DefaultTabBar, ScrollableTabBar, } from 'react-native-scrollable-tab-view';
 import FacebookTabBar from './FacebookTabBar';
 import ActionButton from 'react-native-action-button';
+
 var {height, width} = Dimensions.get('window');
 
 var Credits = React.createClass({
@@ -88,7 +89,7 @@ var Social = React.createClass({
                 <View style={{height: StyleSheet.hairlineWidth, marginVertical: 30,}}/>
             </View>
             <View>
-                <Text style={{textAlign: 'center', color:'#2c3e50', fontFamily:'Bariol'}}>Mayeul du Pradel - Mai 2016</Text>
+                <Text style={{textAlign: 'center', color:'#2c3e50', fontFamily:'Bariol'}}>Mayeul du Pradel - Août 2016</Text>
             </View>
           </View>
         );   

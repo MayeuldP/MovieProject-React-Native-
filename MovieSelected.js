@@ -22,7 +22,7 @@ import FacebookTabBar from './FacebookTabBar';
 
 var titre_film = "";
 var Icon = require('react-native-vector-icons/FontAwesome');
-var DrawerLayoutAndroid = require('DrawerLayoutAndroid')
+var DrawerLayoutAndroid = require('DrawerLayoutAndroid');
 var WINDOW_WIDTH = Dimensions.get('window').width;
 var Lightbox = require('react-native-lightbox');
 const  check_upcoming = false;
