@@ -66,7 +66,7 @@ this is the components that I use in this project.
 * cd MovieProject
 * react-native run-android
 
-* All rights concerning the API for get the movies to [`rottentomatoes`] (https://www.rottentomatoes.com)
+* All rights concerning the API for get the movies to [`rottentomatoes`](https://www.rottentomatoes.com)
 
 ### Prototype
 
